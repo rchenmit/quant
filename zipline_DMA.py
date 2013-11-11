@@ -41,7 +41,7 @@ class DualMovingAverage(TradingAlgorithm):
 
     # Has short mavg crossed long mavg?
         if short_mavg > long_mavg and not self.invested:
-            self.order(s_sym, 100)
+            self.order(s_sym, 150)
             self.invested = True
             buy = True
         elif short_mavg < long_mavg and self.invested:
