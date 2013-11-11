@@ -6,8 +6,10 @@ from datetime import datetime
 import pytz
 import matplotlib.pyplot as plt
 
-
-s_sym = 'AAPL'
+#modify symbol, dates!!!
+s_sym = 'GOOG'
+start = datetime(2002, 1, 1, 0, 0, 0, 0, pytz.utc)
+end = datetime(2013, 10, 31, 0, 0, 0, 0, pytz.utc)
 
 
 class DualMovingAverage(TradingAlgorithm):
@@ -55,9 +57,8 @@ class DualMovingAverage(TradingAlgorithm):
                     buy=buy,
                     sell=sell)
 
+## Run 
 # Load data
-start = datetime(1990, 1, 1, 0, 0, 0, 0, pytz.utc)
-end = datetime(2002, 10, 31, 0, 0, 0, 0, pytz.utc)
 data = load_from_yahoo(stocks=[s_sym], indexes={}, start=start,
                    end=end, adjusted=False)
 
@@ -84,4 +85,4 @@ ax2.plot(perf.ix[perf.buy].index, perf.portfolio_value[perf.buy],
 ax2.plot(perf.ix[perf.sell].index, perf.portfolio_value[perf.sell],
          'v', markersize=10, color='k')
 #fig.show()
-plt.savefig('zipline_ex_output.pdf', format='pdf')
+plt.savefig('zipline_ex_output_' + s_sym + '_' + str(start.date()) + '_' + str(end.date()) + '.pdf', format='pdf')
